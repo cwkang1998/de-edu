@@ -25,7 +25,7 @@ program
   .command('reset-config')
   .description('Create scaffold.config.json')
   .action(() => {
-    createConfig(...parseCreateConfigArgs('hardhat', 'vite', 'localhost', 'localhost'));
+    createConfig(...parseCreateConfigArgs('hardhat', 'nextjs', 'localhost', 'localhost'));
   });
 
 program
@@ -42,7 +42,7 @@ program
 program
   .command('set-react')
   .description('Set the react build tool')
-  .argument('[react build tool]', 'Use nextjs or vite for your frontend', 'vite')
+  .argument('[react build tool]', 'Use nextjs or vite for your frontend', 'nextjs')
   .action((...args: string[]) => {
     setConfig(...parseReactBuild(...args));
   });

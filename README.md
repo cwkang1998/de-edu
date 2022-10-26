@@ -4,7 +4,7 @@
 
 This is the typescript repo of scaffold-eth. Use scaffold-eth-typescript with:
 
-- A react frontend running with `nextjs` or `vite`.
+- A react frontend running with `nextjs`
 - Solidity toolkit of `hardhat` or `foundry`
 - It has the a command line system that allows you to choose a **react frontend** or **solidity toolkit**
 
@@ -128,7 +128,6 @@ The directories that you'll use are:
 packages/solidity-ts/
 
 And one of either:
-packages/vite-app-ts/
 packages/next-app-ts/
 ```
 
