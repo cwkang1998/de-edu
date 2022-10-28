@@ -66,7 +66,7 @@ const Navbar: FC = () => {
       onClose={handleMobileMenuClose}>
       <Box className={classes.mobileMenuContainer}>
         <MenuItem>
-          <Link className={classes.mobileLink} href="/">
+          <Link className={classes.mobileLink} href="/create-course">
             Create Course
           </Link>
         </MenuItem>
@@ -101,11 +101,11 @@ const Navbar: FC = () => {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' }, fontSize: '14px' }}>
-            <Link className={classes.linkNavbar} href="/">
+            <Link className={classes.linkNavbar} href="/create-course">
               Create Course
             </Link>
 
-            <Link className={classes.linkNavbar} href="/products/">
+            <Link className={classes.linkNavbar} href="/sign-in">
               Sign in
             </Link>
           </Box>
