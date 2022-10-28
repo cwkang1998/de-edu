@@ -1,8 +1,8 @@
 import '~~/styles/tailwind.css';
 import '~~/styles/globals.css';
-
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
+import { ThemeProvider } from '@mui/material/styles';
 import { EthComponentsSettingsContext, IEthComponentsSettings } from 'eth-components/models';
 import { EthersAppContext } from 'eth-hooks/context';
 import { NextComponentType } from 'next';
@@ -14,6 +14,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ErrorBoundary, ErrorFallback } from '~common/components';
 import { BLOCKNATIVE_DAPPID } from '~~/config/nextjsApp.config';
 import { appGetInitialProps } from '~~/functions/nextjs/appGetInitialProps';
+import { theme } from '~~/theme';
 
 const cache = createCache({ key: 'next' });
 
@@ -50,7 +51,9 @@ const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
       <EthersAppContext disableDefaultQueryClientRoot={true}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <ThemeSwitcherProvider themeMap={themes} defaultTheme={savedTheme ?? 'light'}>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>{props.children}</ErrorBoundary>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+            </ErrorBoundary>
           </ThemeSwitcherProvider>
         </ErrorBoundary>
       </EthersAppContext>
@@ -67,7 +70,7 @@ const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, ...props }) => {
   console.log('loading app...');
   const [queryClient] = useState(() => new QueryClient());
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
   const dehydradedState = props.pageProps.dehydratedState as unknown;
 
   return (

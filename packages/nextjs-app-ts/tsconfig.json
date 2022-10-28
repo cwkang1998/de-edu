@@ -19,6 +19,9 @@
     "baseUrl": ".",
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "paths": {
       "~~/*": ["./src/*"],
       "~common/*": ["../common/src/*"]
