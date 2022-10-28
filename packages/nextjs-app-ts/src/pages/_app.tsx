@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { EthComponentsSettingsContext, IEthComponentsSettings } from 'eth-components/models';
 import { EthersAppContext } from 'eth-hooks/context';
 import { NextComponentType } from 'next';
-import { AppContext, AppInitialProps, AppProps } from 'next/app';
+import { AppContext, AppInitialProps, AppProps as NextAppProps } from 'next/app';
 import React, { FC, ReactNode, Suspense, useState } from 'react';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
@@ -60,6 +60,9 @@ const ProviderWrapper: FC<{ children?: ReactNode }> = (props) => {
     </EthComponentsSettingsContext.Provider>
   );
 };
+type AppProps<P = any> = {
+  pageProps: P;
+} & Omit<NextAppProps<P>, 'pageProps'>;
 
 /**
  * ### Summary
