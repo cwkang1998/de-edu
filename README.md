@@ -1,11 +1,11 @@
-# 🏗 Scaffold-Eth Typescript
+# De-Edu
 
 ## Features
 
 This is the typescript repo of scaffold-eth. Use scaffold-eth-typescript with:
 
 - A react frontend running with `nextjs`
-- Solidity toolkit of `hardhat` or `foundry`
+- Solidity toolkit of `hardhat`
 - It has the a command line system that allows you to choose a **react frontend** or **solidity toolkit**
 
 ## Quick Start
@@ -66,12 +66,11 @@ use `-h` with any command for help.  e.g. yarn set-react -h
 
 ### Configure react and solidity toolkit
 
-You can change the configuration file to pick different frontends and solidity toolkits.
+You can change the configuration file to pick different frontends and solidity toolkits. Right now this project uses nextjs and hardhat
 
-```bash
-yarn set-react `nextjs` or `vite`
-yarn set-solidity `hardhat` or `foundry`
-```
+````bash
+yarn set-react `nextjs`
+yarn set-solidity `hardhat`
 
 ### Target network
 
@@ -84,7 +83,7 @@ You can configure it from the **config file** or from **command line**.
 ```bash
 yarn set-network -h
 yarn set-network 'localhost' 'localhost, mainnet'
-```
+````
 
 ### More commands
 
@@ -100,24 +99,6 @@ You can use hardhat with right context using
 
 ```bash
 yarn hardhat
-```
-
-### Foundry
-
-Make sure you install foundry
-
-1. Make sure you install foundry first. Use `curl -L https://foundry.paradigm.xyz | bash` to install foundryup
-
-   > You can see more details here. https://book.getfoundry.sh/getting-started/installation
-
-2. Run `yarn install:foundry` to install or update foundry in the right folder. It will also run _forge install_ automatically with the right context.
-
-You can use foundry commands with the right context
-
-```bash
-yarn forge
-yarn anvil
-yarn cast
 ```
 
 ## Directories

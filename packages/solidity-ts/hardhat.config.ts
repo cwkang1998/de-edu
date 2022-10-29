@@ -130,8 +130,8 @@ export const config: HardhatUserConfig = {
     cache: './generated/hardhat/cache',
     artifacts: hardhatArtifactsDir,
     deployments: hardhatDeploymentsDir,
-    deploy: './deploy/hardhat-deploy',
-    tests: './tests/hardhat-tests',
+    deploy: './deploy',
+    tests: './tests',
   },
   typechain: {
     outDir: typechainOutDir,

@@ -34,9 +34,6 @@
     "contracts:watch": "yarn scaffold watch",
     "@🔖🔖🔖🔖🔖 toolkit commands 🔖🔖🔖🔖🔖 ": "echo 📖 scripts & commands",
     "hardhat": "yarn workspace @scaffold-eth/solidity hardhat",
-    "forge": "yarn workspace @scaffold-eth/solidity exec forge",
-    "cast": "yarn workspace @scaffold-eth/solidity exec cast",
-    "anvil": "yarn workspace @scaffold-eth/solidity exec anvil",
     "@🔖🔖🔖🔖🔖 react: nextjs 🔖🔖🔖🔖🔖 ": "echo 🔖🔖🔖🔖🔖 ",
     "start:nextjs": "yarn workspace @scaffold-eth/nextjs-app dev",
     "build:nextjs": "yarn workspace @scaffold-eth/nextjs-app build",
@@ -46,7 +43,6 @@
     "@🔖🔖🔖🔖🔖 utilities 🔖🔖🔖🔖🔖": "echo 📖 utilities commands",
     "syncpack:fix": "yarn syncpack fix-mismatches",
     "postinstall": "yarn husky install",
-    "install:foundry": "yarn workspace @scaffold-eth/solidity exec foundryup && yarn forge install",
     "lint": "yarn workspace @scaffold-eth/common lint --fix && yarn workspace @scaffold-eth/solidity lint --fix && yarn workspace @scaffold-eth/nextjs-app lint --fix",
     "@🔖🔖🔖🔖🔖 dev linking with yalc 🔖🔖🔖🔖🔖": "echo 📖 dev tools",
     "dev:link:components": "yarn workspace @scaffold-eth/common dev:link:components",
@@ -68,13 +64,13 @@
     "chalk": "^4.1.2",
     "commander": "^9.4.0",
     "cross-env": "^7.0.3",
-    "eslint": "^8.23.1",
+    "eslint": "^8.26.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "prettier-plugin-solidity": "^1.0.0-dev.23",
+    "prettier-plugin-solidity": "^1.0.0-beta.24",
     "shx": "^0.3.4",
-    "syncpack": "^8.2.4",
+    "syncpack": "^8.3.9",
     "ts-node": "^10.9.1"
   },
   "lint-staged": {
@@ -112,6 +108,9 @@
     ]
   },
   "volta": {
-    "node": "16.15.0"
+    "node": "^16"
+  },
+  "engines": {
+    "node": "^16"
   }
 }
