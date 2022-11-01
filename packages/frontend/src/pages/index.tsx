@@ -46,7 +46,25 @@ const HomePage: NextPage = () => {
 
   return (
     <>
+      <section tw="max-w-4xl m-auto">
+        <div tw="py-8 flex justify-between">
+          <div tw="max-w-xl space-y-4">
+            <h1 tw="text-4xl font-bold font-heading">Short tagline for the project</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </p>
+          </div>
+          <div tw="w-80 h-80 bg-gray-200" />
+        </div>
+      </section>
+
       <CenterBody>
+        <p>I&apos;m leaving this below for reference</p>
         {/* Title */}
         <div tw="flex flex-col items-center text-center">
           <Link href="https://github.com/ethathon/ethathon" passHref>

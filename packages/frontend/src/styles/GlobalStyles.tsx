@@ -3,11 +3,12 @@ import 'nprogress/nprogress.css'
 import tw, { css, GlobalStyles as BaseStyles } from 'twin.macro'
 
 const customStyles = css`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
   html {
     scroll-behavior: smooth;
   }
   body {
-    ${tw`antialiased bg-black text-white font-mono`}
     ${tw`h-screen min-h-screen relative`}
   }
   #__next,
