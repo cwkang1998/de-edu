@@ -16,6 +16,8 @@ module.exports = {
         },
       },
       fontFamily: {
+        sans: ['Roboto', 'system-ui', 'sans-serif'],
+        heading: ['Roboto Slab', 'system-ui', 'sans-serif'],
         mono: ['Inconsolata', 'Menlo', ...defaultTheme.fontFamily.mono],
       },
       animation: {
