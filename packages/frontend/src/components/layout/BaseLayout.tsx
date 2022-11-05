@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren } from 'react'
-import 'twin.macro'
+import { FC, PropsWithChildren } from 'react';
+import 'twin.macro';
 
 export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -8,5 +8,5 @@ export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
         <main tw="grow flex flex-col relative">{children}</main>
       </div>
     </>
-  )
-}
+  );
+};

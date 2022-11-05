@@ -10,9 +10,9 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-}
+};
 
 // eslint-disable-next-line
-const withTM = require('next-transpile-modules')(['@ethathon/contracts'])
+const withTM = require('next-transpile-modules')(['@ethathon/contracts']);
 
-module.exports = withTM(nextConfig)
+module.exports = withTM(nextConfig);

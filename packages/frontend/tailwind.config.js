@@ -1,6 +1,6 @@
 /* eslint-disable */
-const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -29,4 +29,4 @@ module.exports = {
     // require('@tailwindcss/forms'),
     // require('@tailwindcss/line-clamp'),
   ],
-}
+};

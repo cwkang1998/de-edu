@@ -1,21 +1,21 @@
-import { BaseLayout } from '@components/layout/BaseLayout'
-import { cache } from '@emotion/css'
-import { CacheProvider } from '@emotion/react'
-import { darkTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import '@rainbow-me/rainbowkit/styles.css'
-import { chains, wagmiClient } from '@shared/wagmiClient'
-import GlobalStyles from '@styles/GlobalStyles'
-import type { AppProps } from 'next/app'
-import Router from 'next/router'
-import NProgress from 'nprogress'
-import { Toaster } from 'react-hot-toast'
-import { WagmiConfig } from 'wagmi'
+import { BaseLayout } from '@components/layout/BaseLayout';
+import { cache } from '@emotion/css';
+import { CacheProvider } from '@emotion/react';
+import { darkTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import '@rainbow-me/rainbowkit/styles.css';
+import { chains, wagmiClient } from '@shared/wagmiClient';
+import GlobalStyles from '@styles/GlobalStyles';
+import type { AppProps } from 'next/app';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+import { Toaster } from 'react-hot-toast';
+import { WagmiConfig } from 'wagmi';
 // import { DefaultSeo } from 'next-seo'
 
 // Router Loading Animation with @tanem/react-nprogress
-Router.events.on('routeChangeStart', () => NProgress.start())
-Router.events.on('routeChangeComplete', () => NProgress.done())
-Router.events.on('routeChangeError', () => NProgress.done())
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -73,7 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </CacheProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
