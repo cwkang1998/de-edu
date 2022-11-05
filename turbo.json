@@ -13,14 +13,14 @@
       "dependsOn": ["^build"],
       "outputs": []
     },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
     "lint": {
       "outputs": []
     },
-    "//#lint": {
-      "outputs": []
-    },
-    "lint:fix": {},
-    "//#lint:fix": {}
+    "lint:fix": {}
   },
   "globalDependencies": [
     ".env",

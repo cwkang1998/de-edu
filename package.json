@@ -10,10 +10,15 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "start": "turbo run start",
+    "test": "turbo run test",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "frontend:dev": "pnpm --filter frontend dev",
     "frontend:start": "pnpm --filter frontend start",
+    "contracts:test": "pnpm --filter contracts test",
+    "contracts:build": "pnpm --filter contracts build",
+    "contracts:dev": "pnpm --filter contracts dev",
+    "contracts:start": "pnpm --filter contracts start",
     "prepare": "husky install"
   },
   "pnpm": {
