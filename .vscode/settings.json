@@ -1,23 +1,4 @@
 {
-  "folders": [
-    {
-      "name": "_ROOT",
-      "path": "../"
-    },
-    {
-      "name": "Frontend",
-      "path": "../packages/frontend"
-    },
-    {
-      "name": "Contracts",
-      "path": "../packages/contracts"
-    },
-    {
-      "name": "ProgressNode",
-      "path": "../packages/progress-node"
-    }
-  ],
-  "settings": {
     "eslint.workingDirectories": [{ "mode": "auto" }],
     "files.exclude": {
       "**/node_modules/": true,
@@ -38,5 +19,4 @@
       "source.organizeImports": true,
       "source.fixAll.eslint": true
     }
-  }
 }

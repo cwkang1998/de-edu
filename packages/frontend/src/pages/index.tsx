@@ -1,5 +1,5 @@
 import { CenterBody } from '@components/layout/CenterBody';
-import { Lock__factory } from '@ethathon/contracts/typechain-types';
+import { Lock__factory } from '@deedu/contracts/typechain-types';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useDeployments } from '@shared/useDeployments';
 import type { NextPage } from 'next';
