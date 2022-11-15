@@ -19,6 +19,7 @@
     "contracts:build": "pnpm --filter contracts build",
     "contracts:dev": "pnpm --filter contracts dev",
     "contracts:start": "pnpm --filter contracts start",
+    "progress-node:start": "pnpm --filter progress-node start",
     "prepare": "husky install"
   },
   "pnpm": {

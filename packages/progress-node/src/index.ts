@@ -75,6 +75,6 @@ const main = async (port: number) => {
   });
 };
 
-main(80180)
-  .then((msg) => console.log(msg))
+main(60601)
+  .then(() => console.log('Server ready.'))
   .catch((err) => console.error(err));

@@ -3,8 +3,7 @@
   "license": "MIT",
   "version": "0.0.1",
   "scripts": {
-    "compile": "tsc .",
-    "build": "pnpm clean && pnpm compile",
+    "start": "ts-node src/index.ts",
     "lint": "prettier . --check && pnpm eslint",
     "lint:fix": "prettier . --write && pnpm eslint --fix",
     "eslint": "eslint . --ext .ts"
