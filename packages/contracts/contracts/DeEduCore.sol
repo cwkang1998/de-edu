@@ -1,113 +1,170 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract DeEdu {
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/utils/Counters.sol';
+import '@chainlink/contracts/src/v0.8/AutomationCompatible.sol';
 
-    struct Course {
-        uint256 id; 
-        string name;
-        address author;
-        address[] students;
-        string courseMaterial;
-        uint256 stakeAmount;
-        uint256 courseEndDateTime;
+contract DeEdu is Ownable, AutomationCompatible {
+  struct Course {
+    string name;
+    address author;
+    address[] students;
+    string courseMaterial;
+    uint256 stakeAmount;
+    uint256 courseEndDateTime;
+    bool ended;
+    bool deleted;
+  }
+
+  struct User {
+    string userDetailsURI; // User profile information
+    uint256[] enrolledCourses;
+    uint256[] completedCourses;
+    uint256[] createdCourses;
+    bool exists;
+  }
+
+  Course[] public courses;
+
+  mapping(address => User) public usersMapping;
+
+  constructor() {
+    // A null course to remove courses.
+    courses.push(
+      Course({
+        name: 'Null course',
+        author: address(0),
+        students: new address[](0),
+        courseMaterial: '',
+        stakeAmount: 0,
+        courseEndDateTime: 0,
+        ended: true,
+        deleted: true
+      })
+    );
+  }
+
+  // --- User ---
+
+  function signUpUser(string calldata userDetailsURI) external {
+    User memory user = _getUser(msg.sender);
+    require(!user.exists);
+    user.userDetailsURI = userDetailsURI;
+    user.exists = true;
+    usersMapping[msg.sender] = user;
+  }
+
+  function updateUserDetails(string calldata userDetailsURI) external {
+    require(_getUser(msg.sender).exists);
+    _getUser(msg.sender).userDetailsURI = userDetailsURI;
+  }
+
+  // --- Courses ---
+  function getUserEnrolledCourse() external view returns (Course[] memory userCourses) {
+    User storage user = _getUser(msg.sender);
+    userCourses = new Course[](user.enrolledCourses.length);
+    for (uint8 i = 0; i < user.enrolledCourses.length; i++) {
+      if (user.enrolledCourses[i] != 0) {
+        userCourses[i] = courses[user.enrolledCourses[i]];
+      }
     }
+  }
 
-    struct User {
-        string userDetailsURI; // User profile information
-        uint256[] enrolledCourses;
-        uint256[] createdCourses;
-        bool exists;
+  function getUserCreatedCourse() external view returns (Course[] memory userCreatedCourses) {
+    User storage user = _getUser(msg.sender);
+    userCreatedCourses = new Course[](user.createdCourses.length);
+    for (uint8 i = 0; i < user.createdCourses.length; i++) {
+      if (user.createdCourses[i] != 0) {
+        userCreatedCourses[i] = courses[user.createdCourses[i]];
+      }
     }
+  }
 
-    Course[] public courses;
+  function getCourse(uint256 courseId) external view returns (Course memory course) {
+    course = _getCourse(courseId);
+  }
 
-    mapping(address => User) public addrMappingToUser;
+  function createCourse(Course calldata courseData) external {
+    User storage user = _getUser(msg.sender);
+    courses.push(courseData);
+    user.createdCourses.push(courses.length - 1);
+  }
 
-    constructor() {}
+  function deleteCourse(uint256 courseId) external {
+    require(
+      msg.sender == _getCourse(courseId).author,
+      'Only author allowed to delete their course'
+    );
+    _getCourse(courseId).deleted = true;
+  }
 
-    // --- User ---
+  function enroll(uint256 courseId) external payable {
+    User storage user = _getUser(msg.sender);
+    require(courseId < courses.length, 'Invalid courseId');
+    require(!courses[courseId].deleted, 'Course deleted');
+    user.enrolledCourses.push(courseId);
+  }
 
-    function signUpUser(string calldata userDetailsURI) external {
-        require(!addrMappingToUser[msg.sender].exists);
-        User memory user;
-        user.userDetailsURI = userDetailsURI;
-        user.exists = true;
-        addrMappingToUser[msg.sender] = user;
+  function completeCourse(
+    uint256 enrollmentId,
+    bytes calldata hashedMessage,
+    bytes32 r,
+    bytes32 s,
+    uint8 v
+  ) external {
+    bytes memory prefix = '\x19Ethereum Signed Message:\n32';
+    bytes32 prefixedHashMessage = keccak256(abi.encodePacked(prefix, hashedMessage));
+    address signer = ecrecover(prefixedHashMessage, v, r, s);
+
+    require(signer == msg.sender, 'Invalid signature');
+    _getUser(msg.sender).completedCourses.push(enrollmentId);
+  }
+
+  // this function can be called by student, and the liquidator, so msg.sender is not a legit way of
+  function exitCourse(uint256 enrollmentId) internal {
+    require(_getUser(msg.sender).enrolledCourses[enrollmentId] != 0);
+    _getUser(msg.sender).enrolledCourses[enrollmentId] = 0;
+  }
+
+  // -- Progress checking and certification issurance --
+
+  function checkUpkeep(
+    bytes calldata /* checkData */
+  )
+    external
+    view
+    override
+    returns (
+      bool upkeepNeeded,
+      bytes memory /* performData */
+    )
+  {
+    for (uint8 i = 1; i < courses.length; i++) {
+      if (block.timestamp > courses[i].courseEndDateTime) {
+        upkeepNeeded = true;
+        break;
+      }
     }
+  }
 
-    function updateUserDetails(string calldata userDetailsURI) external {
-        require(addrMappingToUser[msg.sender].exists);
-        addrMappingToUser[msg.sender].userDetailsURI = userDetailsURI;
+  function performUpkeep(
+    bytes calldata /* performData */
+  ) external override {
+    for (uint8 i = 1; i < courses.length; i++) {
+      if (block.timestamp > courses[i].courseEndDateTime && !courses[i].deleted) {
+        courses[i].ended = true;
+      }
     }
+  }
 
+  // -- Internal private function
+  function _getUser(address userAddress) internal view returns (User storage) {
+    return usersMapping[userAddress];
+  }
 
-
-    // --- Courses ---
-
-    // function getCourse(uint courseId) external view returns (Course memory) {
-    //     require(courseId < courses.length, "Invalid courseId");
-    //     return courses[courseId];
-    // }
-
-    
-    // function createCourse(Course calldata courseData) external {
-    //     // create a new course object, add it to array and teacher
-    //     // increase totalCourses count by 1
-    //     Teacher memory teacher = getTeacher();
-    //     teacher.activeCourses.push(totalCourses);
-    //     teacher.activeCoursesCount += 1;
-    //     courses.push(courseData);
-    //     totalCourses += 1;
-    // }
-
-    // function removeCourse(uint256 courseId) external {}
-
-    // // Enrollment related functions
-
-    // function enroll(uint256 courseId) external payable {
-    //     // create a new enroll object, add to array, and to student
-    //     // increase totalEnrollment count by 1
-    //     Course storage course = getCourse(courseId);
-    //     (bool sent, ) = address(this).call{value: course.stakeAmount}("");
-    //     require(sent, "Failed to send ether");
-    //     Enrollment memory enrollment = Enrollment(courseId, msg.sender, 0, false, course.stakeAmount, block.timestamp, block.timestamp + course.studyPeriod);
-    //     enrollments.push(enrollment);
-        
-    //     Student storage student = getStudent();
-    //     student.activeEnrollments.push(totalEnrollments);
-    //     student.activeEnrollmentsCount += 1;
-
-    //     totalEnrollments += 1;
-    // }
-
-    // function finishCourse(uint256 enrollmentId)
-    //     external
-    //     returns (bool finished)
-    // {
-    //     // check if student (msg.sender) has this enrollment
-    //     // check if student actually finishes the course, by comparing progress == course.totalProgress
-    //     // if the student has actually finished the course, call issueCertificate()
-    //     // call _removeEnrollment()
-
-    // }
-
-    // // this function can be called by student, and the liquidator, so msg.sender is not a legit way of
-    // function _removeEnrollment(uint256 enrollmentId) internal {
-    //     // remove enrollment object from enrollments array, as well as from student object
-    //     // decrease totalEnrollments count by 1
-    // }
-
-    // function updateProgress(uint256 enrollmentId, uint256 progress) external {}
-
-    // // issurance of certificate
-
-    // function issueCertificate(uint256 enrollment) external {}
-
-    // // UpKeep - liquidation of staking
-
-    // function liquidateStaking(uint256 enrollmentId) external {
-    //     // move fund from enrollment object to vault object
-    //     // call finishCourse()
-    // }
+  function _getCourse(uint256 courseId) internal view returns (Course storage) {
+    require(courseId < courses.length);
+    return courses[courseId];
+  }
 }

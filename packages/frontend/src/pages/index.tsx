@@ -1,5 +1,5 @@
 import { CenterBody } from '@components/layout/CenterBody';
-import { Lock__factory } from '@deedu/contracts/typechain-types';
+// import { Lock__factory } from '@deedu/contracts/typechain-types';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useDeployments } from '@shared/useDeployments';
 import type { NextPage } from 'next';
@@ -17,18 +17,18 @@ const HomePage: NextPage = () => {
   const { data: signer } = useSigner();
   const { contracts } = useDeployments();
 
-  const getOwner = async () => {
-    if (!signer || !contracts) return;
-    const contract = Lock__factory.connect(contracts.Lock.address, signer);
-    try {
-      const owner = await contract.owner();
-      toast.success(owner);
-      console.log({ owner });
-    } catch (e) {
-      toast.error('Error while fetching owner. Try again…');
-      console.error(e);
-    }
-  };
+  // const getOwner = async () => {
+  //   if (!signer || !contracts) return;
+  //   const contract = Lock__factory.connect(contracts.Lock.address, signer);
+  //   try {
+  //     const owner = await contract.owner();
+  //     toast.success(owner);
+  //     console.log({ owner });
+  //   } catch (e) {
+  //     toast.error('Error while fetching owner. Try again…');
+  //     console.error(e);
+  //   }
+  // };
 
   const withdraw = async () => {
     if (!signer || !contracts) return;
