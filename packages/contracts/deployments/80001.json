@@ -69,6 +69,494 @@
           "type": "function"
         }
       ]
+    },
+    "DeEdu": {
+      "address": "0x9BE83268393089b917F1ACbfFA527a96Ce737077",
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "OnlySimulatedBackend",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "",
+              "type": "bytes"
+            }
+          ],
+          "name": "checkUpkeep",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "upkeepNeeded",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes",
+              "name": "",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "enrollmentId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "hashedMessage",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "s",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint8",
+              "name": "v",
+              "type": "uint8"
+            }
+          ],
+          "name": "completeCourse",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "name": "courses",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "author",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "courseMaterial",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "stakeAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "courseEndDateTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "ended",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "deleted",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "author",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address[]",
+                  "name": "students",
+                  "type": "address[]"
+                },
+                {
+                  "internalType": "string",
+                  "name": "courseMaterial",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "stakeAmount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "courseEndDateTime",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "ended",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "deleted",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct DeEdu.Course",
+              "name": "courseData",
+              "type": "tuple"
+            }
+          ],
+          "name": "createCourse",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "courseId",
+              "type": "uint256"
+            }
+          ],
+          "name": "deleteCourse",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "courseId",
+              "type": "uint256"
+            }
+          ],
+          "name": "enroll",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "courseId",
+              "type": "uint256"
+            }
+          ],
+          "name": "getCourse",
+          "outputs": [
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "author",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address[]",
+                  "name": "students",
+                  "type": "address[]"
+                },
+                {
+                  "internalType": "string",
+                  "name": "courseMaterial",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "stakeAmount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "courseEndDateTime",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "ended",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "deleted",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct DeEdu.Course",
+              "name": "course",
+              "type": "tuple"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getUserCreatedCourse",
+          "outputs": [
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "author",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address[]",
+                  "name": "students",
+                  "type": "address[]"
+                },
+                {
+                  "internalType": "string",
+                  "name": "courseMaterial",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "stakeAmount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "courseEndDateTime",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "ended",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "deleted",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct DeEdu.Course[]",
+              "name": "userCreatedCourses",
+              "type": "tuple[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getUserEnrolledCourse",
+          "outputs": [
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "author",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address[]",
+                  "name": "students",
+                  "type": "address[]"
+                },
+                {
+                  "internalType": "string",
+                  "name": "courseMaterial",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "stakeAmount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "courseEndDateTime",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "ended",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "deleted",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct DeEdu.Course[]",
+              "name": "userCourses",
+              "type": "tuple[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "",
+              "type": "bytes"
+            }
+          ],
+          "name": "performUpkeep",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "renounceOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "userDetailsURI",
+              "type": "string"
+            }
+          ],
+          "name": "signUpUser",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "transferOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "userDetailsURI",
+              "type": "string"
+            }
+          ],
+          "name": "updateUserDetails",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "usersMapping",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "userDetailsURI",
+              "type": "string"
+            },
+            {
+              "internalType": "bool",
+              "name": "exists",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
     }
   }
 }

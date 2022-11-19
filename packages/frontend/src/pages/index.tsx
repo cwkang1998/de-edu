@@ -1,5 +1,5 @@
 import { CenterBody } from '@components/layout/CenterBody';
-// import { Lock__factory } from '@deedu/contracts/typechain-types';
+import { DeEdu__factory } from '@deedu/contracts/typechain-types';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useDeployments } from '@shared/useDeployments';
 import type { NextPage } from 'next';
@@ -17,32 +17,32 @@ const HomePage: NextPage = () => {
   const { data: signer } = useSigner();
   const { contracts } = useDeployments();
 
-  // const getOwner = async () => {
-  //   if (!signer || !contracts) return;
-  //   const contract = Lock__factory.connect(contracts.Lock.address, signer);
-  //   try {
-  //     const owner = await contract.owner();
-  //     toast.success(owner);
-  //     console.log({ owner });
-  //   } catch (e) {
-  //     toast.error('Error while fetching owner. Try again…');
-  //     console.error(e);
-  //   }
-  // };
-
-  const withdraw = async () => {
+  const getOwner = async () => {
     if (!signer || !contracts) return;
-    const contract = Lock__factory.connect(contracts.Lock.address, signer);
+    const contract = DeEdu__factory.connect(contracts.Lock.address, signer);
     try {
-      const tsx = await contract.withdraw({ gasLimit: 50000 });
-      const receipt = await tsx.wait();
-      toast.success('Successfully withdrawn!');
-      console.log({ receipt });
-    } catch (e: any) {
-      toast.error('Error while withdrawal. Try again…');
+      const owner = await contract.owner();
+      toast.success(owner);
+      console.log({ owner });
+    } catch (e) {
+      toast.error('Error while fetching owner. Try again…');
       console.error(e);
     }
   };
+
+  // const withdraw = async () => {
+  //   if (!signer || !contracts) return;
+  //   const contract = DeEdu__factory.connect(contracts.Lock.address, signer);
+  //   try {
+  //     const tsx = await contract.withdraw({ gasLimit: 50000 });
+  //     const receipt = await tsx.wait();
+  //     toast.success('Successfully withdrawn!');
+  //     console.log({ receipt });
+  //   } catch (e: any) {
+  //     toast.error('Error while withdrawal. Try again…');
+  //     console.error(e);
+  //   }
+  // };
 
   return (
     <>
@@ -70,7 +70,7 @@ const HomePage: NextPage = () => {
           <div tw="mt-6 flex items-center">
             <div tw="text-gray-400 mr-2">Lock.sol:</div>
             <Button onClick={() => getOwner()}>Get Owner</Button>
-            <Button onClick={() => withdraw()}>Withdraw</Button>
+            {/* <Button onClick={() => withdraw()}>Withdraw</Button> */}
           </div>
         )}
       </CenterBody>
